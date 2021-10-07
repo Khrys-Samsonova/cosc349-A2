@@ -14,7 +14,7 @@
 
 
 <!-- save a meal to the database -->
-<form>
+<form action='' method='post'>
   <table border="0">
     <tr>
       <td>Meal Name</td>
@@ -33,6 +33,26 @@
     </tr>
   </table>
 </form>
+<?php
+if(isset($_POST["submit"])){
+    $hostname = 'assignment-2-rds.cdryxhulhnxp.us-east-1.rds.amazonaws.com';
+    $username = 'admin';
+    $password = 'khrysoliver';
+
+    try{
+        $dbh = new PDO("mysql:host=$hostname, dbname=assignment2Db", $username, $password);
+
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "INSERT INTO meals (meal_name, meal_description) VALUES ('".$_POST["meal_name"]."','".$_POST["meal_description"]."')";
+
+        $dbh = null;
+    }
+    catch(PDOException $e){
+        echo $e->getMessage();
+    }
+
+}
+?>
 
 <table class="center" border="1">
 <tr><th>Meal Name</th><th>Meal Description</th></tr>
