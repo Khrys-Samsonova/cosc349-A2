@@ -1,0 +1,38 @@
+body{
+    background-color: #fffbf7;
+    font-family: "Times New Roman", Times, serif;
+}
+
+main{
+    background-color: #fffbf7;
+}
+
+th { 
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #006a85;
+    color: white;
+}
+
+table, th, td {
+  border: 2px solid grey;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 0.2em;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+tr:hover { background-color: #9fb9c0;
+}
+
+/* Solid border */
+hr.solid {
+    border-top: 3px solid #bbb;
+  }
