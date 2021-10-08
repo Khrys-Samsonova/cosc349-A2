@@ -88,13 +88,23 @@ if(isset($_POST["deleteItem"])){
 
     $delete = $_POST['deleteItem'];
 
+    $savedArray = array();
+
     $savedVar = $pdo->query("SELECT * FROM meals WHERE meal_name = '$delete'");
 
-    $archivedVar = fopen('/var/www/html/archives.csv', 'w');
+    $row = $savedVar->fetch();
 
-    fwrite($archivedVar, savedVar);
+    $savedArray[] = $row["meal_name"];
 
-    /* echo shell_exec ("aws s3 mv archives.csv s3://assignment2-archive-bucket"); */
+    $mealname = $row["meal_name"];
+
+    $savedArray[] = $row["meal_description"];
+
+    $archivedVar = fopen($row["meal_name"].'_archives.json', 'w');
+
+    fwrite($archivedVar, json_encode($savedArray));
+
+    shell_exec ('aws s3 mv ' . $mealname . '_archives.json s3://assignment2-archive-bucket');
 
     fclose($archivedVar);
 
